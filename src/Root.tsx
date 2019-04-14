@@ -3,7 +3,7 @@ import { Router } from "react-router-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { store, history } from "./redux/init";
-import LocolizedIntlProvider from "./LocolizedIntlProvider";
+import LocalizedIntlProvider from "./LocalizedIntlProvider";
 import ThemeProvider from "./ThemeProvider";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
@@ -13,13 +13,13 @@ class Root extends React.PureComponent {
     render() {
         return (
             <Provider store={store}>
-                <LocolizedIntlProvider>
+                <LocalizedIntlProvider>
                     <ThemeProvider>
                         <Router history={history}>
                             <App />
                         </Router>
                     </ThemeProvider>
-                </LocolizedIntlProvider>
+                </LocalizedIntlProvider>
             </Provider>
         );
     }

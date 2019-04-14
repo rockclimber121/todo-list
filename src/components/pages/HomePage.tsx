@@ -13,6 +13,7 @@ import { Todo } from "../../redux/modules/Todos/types";
 import TodoDialog from "../common/TodoDialog/TodoDialog";
 import TodoFilter from "../common/TodoFilter/TodoFilter";
 import PageLayout from "../common/PageLayout/PageLayout";
+import { createSelector } from "reselect";
 
 const styles = () =>
     createStyles({
@@ -56,6 +57,21 @@ type State = {
 };
 
 type Props = WithStyles<typeof styles> & ReturnType<typeof mapStateToProps> & typeof dispatchToProps;
+
+const filteredTotosSelector = createSelector(
+    (props: { todos: Todo[]; onlyFavorite: boolean; onlyNotCompleted: boolean }) => ({
+        todos: props.todos,
+        onlyFavorite: props.onlyFavorite,
+        onlyNotCompleted: props.onlyNotCompleted,
+    }),
+    ({ todos, onlyFavorite, onlyNotCompleted }) => {
+        if (onlyFavorite || onlyNotCompleted) {
+            return todos.filter(x => (!onlyFavorite || x.isFavorite) && (!onlyNotCompleted || !x.hasCompleted));
+        } else {
+            return todos;
+        }
+    },
+);
 
 class HomePage extends React.PureComponent<Props, State> {
     constructor(props: Props) {
@@ -105,14 +121,11 @@ class HomePage extends React.PureComponent<Props, State> {
 
     private _getFilteredTodos() {
         const { onlyFavorite = false, onlyNotCompleted = false } = this.state;
-
-        if (onlyFavorite || onlyNotCompleted) {
-            return this.props.todos.filter(
-                x => (!onlyFavorite || x.isFavorite) && (!onlyNotCompleted || !x.hasCompleted),
-            );
-        }
-
-        return this.props.todos;
+        return filteredTotosSelector({
+            todos: this.props.todos,
+            onlyFavorite,
+            onlyNotCompleted,
+        });
     }
 
     private _onAddNewTodo = () => {
