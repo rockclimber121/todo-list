@@ -12,6 +12,9 @@ import classnames from "classnames";
 
 const styles = (theme: Theme) =>
     createStyles({
+        root: {
+            minHeight: 200,
+        },
         block: {
             backgroundColor: theme.palette.background.default,
             margin: 0,
@@ -55,7 +58,7 @@ class ApplicationDialog extends React.PureComponent<Props> {
             <Dialog
                 open={this.props.isOpen}
                 onClose={this._onClose}
-                className={dialogClasses && dialogClasses.root}
+                className={classnames(dialogClasses && dialogClasses.root, classes.root)}
                 aria-labelledby={TITLE_ID}
                 aria-describedby={DESCRIPTION_ID}
             >

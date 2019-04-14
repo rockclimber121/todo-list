@@ -25,7 +25,7 @@ addLocaleData(require("react-intl/locale-data/ru"));
 
 type Props = ReturnType<typeof mapStateToProps> & typeof dispatchToProps;
 
-class LocolizedIntlProvider extends React.PureComponent<Props> {
+class LocalizedIntlProvider extends React.PureComponent<Props> {
     componentDidMount() {
         this.props.loadLocale();
     }
@@ -49,4 +49,4 @@ class LocolizedIntlProvider extends React.PureComponent<Props> {
 export default connect(
     mapStateToProps,
     dispatchToProps,
-)(LocolizedIntlProvider);
+)(LocalizedIntlProvider);
