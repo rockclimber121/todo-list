@@ -39,7 +39,6 @@ export function setThemeValue(theme: ThemeType) {
 }
 
 export function getThemeValue(): ThemeType {
-    debugger;
     const item = localStorage.getItem(storageThemeKey);
     return item ? JSON.parse(item) : ThemeType.Standart;
 }
