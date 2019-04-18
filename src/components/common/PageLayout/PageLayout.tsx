@@ -30,7 +30,6 @@ const styles = (theme: Theme) =>
         },
         locale: {
             marginRight: theme.spacing.unit,
-            backgroundColor: theme.palette.action.disabledBackground,
         },
         theme: {
             marginRight: theme.spacing.unit,
